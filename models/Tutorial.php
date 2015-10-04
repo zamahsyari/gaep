@@ -11,7 +11,7 @@ use Yii;
  * @property string $judul
  * @property string $file
  * @property string $thumb
- * @property string $username
+ * @property integer $user_id
  * @property string $tag
  * @property integer $subkategori_id
  * @property string $deskripsi
@@ -20,14 +20,16 @@ use Yii;
  * @property string $created
  * @property string $modified
  *
+ * @property User $user
  * @property Subkategori $subkategori
- * @property Users $username0
  */
 class Tutorial extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
+
+    public $file_upload;
     public static function tableName()
     {
         return 'tutorial';
@@ -39,12 +41,11 @@ class Tutorial extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['subkategori_id', 'downloads', 'views'], 'integer'],
+            [['user_id', 'subkategori_id', 'downloads', 'views'], 'integer'],
             [['deskripsi'], 'string'],
             [['created', 'modified'], 'safe'],
             [['judul'], 'string', 'max' => 250],
             [['file', 'thumb'], 'string', 'max' => 500],
-            [['username'], 'string', 'max' => 100],
             [['tag'], 'string', 'max' => 1000]
         ];
     }
@@ -59,7 +60,7 @@ class Tutorial extends \yii\db\ActiveRecord
             'judul' => 'Judul',
             'file' => 'File',
             'thumb' => 'Thumb',
-            'username' => 'Username',
+            'user_id' => 'User ID',
             'tag' => 'Tag',
             'subkategori_id' => 'Subkategori ID',
             'deskripsi' => 'Deskripsi',
@@ -73,16 +74,16 @@ class Tutorial extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSubkategori()
+    public function getUser()
     {
-        return $this->hasOne(Subkategori::className(), ['id' => 'subkategori_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsername0()
+    public function getSubkategori()
     {
-        return $this->hasOne(Users::className(), ['username' => 'username']);
+        return $this->hasOne(Subkategori::className(), ['id' => 'subkategori_id']);
     }
 }

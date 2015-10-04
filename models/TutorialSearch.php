@@ -18,8 +18,8 @@ class TutorialSearch extends Tutorial
     public function rules()
     {
         return [
-            [['id', 'subkategori_id'], 'integer'],
-            [['judul', 'file', 'username', 'created', 'modified'], 'safe'],
+            [['id', 'subkategori_id','user_id'], 'integer'],
+            [['judul', 'file', 'created', 'modified'], 'safe'],
         ];
     }
 
@@ -54,13 +54,13 @@ class TutorialSearch extends Tutorial
         $query->andFilterWhere([
             'id' => $this->id,
             'subkategori_id' => $this->subkategori_id,
+            'user_id' => $this->user_id,
             'created' => $this->created,
             'modified' => $this->modified,
         ]);
 
         $query->andFilterWhere(['like', 'judul', $this->judul])
-            ->andFilterWhere(['like', 'file', $this->file])
-            ->andFilterWhere(['like', 'username', $this->username]);
+            ->andFilterWhere(['like', 'file', $this->file]);
 
         return $dataProvider;
     }

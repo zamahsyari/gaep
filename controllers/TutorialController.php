@@ -36,8 +36,12 @@ class TutorialController extends Controller
      */
     public function actionIndex()
     {
+        
         $searchModel = new TutorialSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $param_search = Yii::$app->request->queryParams;
+        $param_search['TutorialSearch']['user_id'] = Yii::$app->session->get('user.id');
+        
+        $dataProvider = $searchModel->search($param_search);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -72,6 +76,7 @@ class TutorialController extends Controller
         $model = new Tutorial();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->user_id = Yii::$app->session->get('user.id');
             $model->file_upload = UploadedFile::getInstance($model,'file');
             $model->file_upload->saveAs('uploads/tutorial/tutorial_'.$model->id.'.'.$model->file_upload->extension);
             $model->file = 'uploads/tutorial/tutorial_'.$model->id.'.'.$model->file_upload->extension;

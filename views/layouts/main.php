@@ -31,6 +31,7 @@ AppAsset::register($this);
                     'class' => 'navbar-inverse navbar-fixed-top',
                 ],
             ]);
+
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
@@ -38,10 +39,17 @@ AppAsset::register($this);
                     ['label' => 'About', 'url' => ['/site/about']],
                     ['label' => 'Contact', 'url' => ['/site/contact']],
                     Yii::$app->user->isGuest ?
-                        ['label' => 'Login', 'url' => ['/site/login']] :
-                        ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                            'url' => ['/site/logout'],
-                            'linkOptions' => ['data-method' => 'post']],
+                        ['label' => 'Member','items'=>[
+                            ['label'=>'Masuk','url' => ['/site/login']],
+                            ['label'=>'Daftar','url' => ['/site/signup']]
+                        ]] : 
+                        ['label' => 'Member','items'=>[
+                            ['label'=>'Upload','url' => ['/tutorial/index']],
+                            ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                                'url' => ['/site/logout'],
+                                'linkOptions' => ['data-method' => 'post']]
+                        ]]
+                        
                 ],
             ]);
             NavBar::end();

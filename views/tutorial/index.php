@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\TutorialSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tutorials';
+$this->title = 'Tutorial Anda';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container content">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Tutorial', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Upload Tutorial', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,10 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'judul',
             'file:ntext',
-            'username',
             'subkategori.nama',
             // 'created',
             // 'modified',

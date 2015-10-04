@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Tutorial */
 
 $this->title = $model->judul;
-$this->params['breadcrumbs'][] = ['label' => 'Tutorials', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Tutorial', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tutorial-view">
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Apakah anda yakin akan menghapus tutorial ini?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -28,13 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'judul',
             'file:ntext',
-            'username',
-            'subkategori.nama',
-            'created',
-            'modified',
+            'subkategori.nama'
+            
         ],
     ]) ?>
 
