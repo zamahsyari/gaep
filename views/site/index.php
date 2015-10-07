@@ -1,6 +1,9 @@
 <?php
 /* @var $this yii\web\View */
 $this->title = 'Gama Animation Portal';
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+Html::csrfMetaTags()
 ?>
 
 <!--=== Search Block ===-->
@@ -8,14 +11,15 @@ $this->title = 'Gama Animation Portal';
     <div class="container">
         <div class="col-md-6 col-md-offset-3">
             <h1>PELAJARI <span class="color-green">HAL</span> BARU</h1>
-
+			<form action="<?php echo Yii::$app->request->baseUrl?>/index.php?r=tutorial/search" method="post">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Cari Tutorial Animasi ...">
+                <input type="text" name="search" class="form-control" placeholder="Cari Tutorial Animasi ...">
+                <input type="hidden" name="_csrf" value="ZEZ6Y0xrY3ARGS42fTwhMQgkDgF6BCEGEx4SMXQMBR4CPy0iPCIwNQ==">
                 <span class="input-group-btn">
-                    <button class="btn-u btn-u-lg" type="button"><i class="fa fa-search"></i></button>
+                    <button class="btn-u btn-u-lg" type="submit"><i class="fa fa-search"></i></button>
                 </span>
             </div>
-  
+  			</form>
         </div>
     </div>    
 </div><!--/container-->     

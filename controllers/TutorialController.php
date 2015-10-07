@@ -7,7 +7,7 @@ use app\models\Tutorial;
 use app\models\TutorialSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-
+use yii\data\Pagination;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\web\Response;
@@ -136,4 +136,24 @@ class TutorialController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+	
+	public function actionSearch(){
+		$post=Yii::$app->request->post();
+		$query=Tutorial::find()->where('judul LIKE :judul',array(':judul'=>'%'.$post['search'].'%'));
+		$pagination = new Pagination([
+            'defaultPageSize' => 5,
+            'totalCount' => $query->count(),
+        ]);
+		$data= $countries = $query->orderBy('id')
+            	->offset($pagination->offset)
+            	->limit($pagination->limit)
+            	->all();
+		$count=$query->count();
+		return $this->render('searchresult',[
+			'data'			=> $data,
+			'count'			=> $count,
+			'pagination'	=> $pagination,
+			'search'		=> $post['search'],
+		]);
+	}
 }
