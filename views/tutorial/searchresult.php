@@ -79,7 +79,7 @@ Html::csrfMetaTags()
                 	foreach($data as $row){
                 		?>
                 		<div class="inner-results">
-		                    <h3><a href="#"><?= $row->judul ?></a></h3>
+                			<h3><?= Html::a($row->judul, ['tutorial/view', 'id' =>$row->id])?></h3>
 		                    <p>
 		                    	<?php 
 		                    		if(strlen($row->deskripsi) > 500){
