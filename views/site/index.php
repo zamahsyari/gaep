@@ -3,6 +3,7 @@
 $this->title = 'Gama Animation Portal';
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\Url;
 Html::csrfMetaTags()
 ?>
 
@@ -11,15 +12,24 @@ Html::csrfMetaTags()
     <div class="container">
         <div class="col-md-6 col-md-offset-3">
             <h1>PELAJARI <span class="color-green">HAL</span> BARU</h1>
-			<form action="<?php echo Yii::$app->request->baseUrl?>/index.php?r=tutorial/search" method="post">
-            <div class="input-group">
+			<?php
+                	$form=ActiveForm::begin([
+                		'method'	=>	'get',
+                		'action'	=>	Url::toRoute('tutorial/search'),
+                	]);
+                ?>
+	            
+			<div class="input-group">
+                
                 <input type="text" name="search" class="form-control" placeholder="Cari Tutorial Animasi ...">
-                <input type="hidden" name="_csrf" value="ZEZ6Y0xrY3ARGS42fTwhMQgkDgF6BCEGEx4SMXQMBR4CPy0iPCIwNQ==">
+                <!-- <input type="hidden" name="_csrf" value="ZEZ6Y0xrY3ARGS42fTwhMQgkDgF6BCEGEx4SMXQMBR4CPy0iPCIwNQ=="> -->
                 <span class="input-group-btn">
                     <button class="btn-u btn-u-lg" type="submit"><i class="fa fa-search"></i></button>
                 </span>
             </div>
-  			</form>
+  			<?php
+	  				ActiveForm::end();
+	  			?>
         </div>
     </div>    
 </div><!--/container-->     
@@ -50,39 +60,39 @@ Html::csrfMetaTags()
         <!-- End Info Blocks -->
         
         <!-- Begin Section-Block -->
-        <div class="col-md-4 col-sm-12">
-            <div class="section-block">
-                <div class="text-center">
+        <!-- <div class="col-md-4 col-sm-12"> -->
+            <!-- <div class="section-block"> -->
+                <!-- <div class="text-center">
                     <i class="rounded icon-custom icon-sm icon-bg-darker line-icon icon-graph"></i>
                     <h2>Popular Search</h2>  
                     <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis. <a href="#">View more</a></p>
-                </div>    
+                </div>    --> 
                 
-                </br>
+                <!-- </br> -->
                 
                 <!-- Progress Bar -->
-                <h3 class="heading-xs no-top-space">Web Design <span class="pull-right">88%</span></h3>
+                <!-- <h3 class="heading-xs no-top-space">Web Design <span class="pull-right">88%</span></h3>
                 <div class="progress progress-u progress-xxs">
                     <div style="width: 88%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="88" role="progressbar" class="progress-bar progress-bar-u">
                     </div>
-                </div>
+                </div> -->
 
-                <h3 class="heading-xs no-top-space">PHP/WordPress <span class="pull-right">76%</span></h3>
+                <!-- <h3 class="heading-xs no-top-space">PHP/WordPress <span class="pull-right">76%</span></h3>
                 <div class="progress progress-u progress-xxs">
                     <div style="width: 76%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="76" role="progressbar" class="progress-bar progress-bar-u">
                     </div>
-                </div>
+                </div> -->
 
-                <h3 class="heading-xs no-top-space">HTML/CSS <span class="pull-right">97%</span></h3>
+                <!-- <h3 class="heading-xs no-top-space">HTML/CSS <span class="pull-right">97%</span></h3>
                 <div class="progress progress-u progress-xxs">
                     <div style="width: 97%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="97" role="progressbar" class="progress-bar progress-bar-u">
                     </div>
-                </div>
+                </div> -->
                 <!-- End Progress Bar -->
 
-                <div class="clearfix"></div>
+                <!-- <div class="clearfix"></div> -->
 
-                <div class="section-block-info">
+                <!-- <div class="section-block-info">
                     <ul class="list-inline tags-v1">
                         <li><a href="#">#HTML5</a></li>
                         <li><a href="#">#Bootstrap</a></li>
@@ -91,9 +101,9 @@ Html::csrfMetaTags()
                         <li><a href="#">#Unify</a></li>
                         <li><a href="#">#JavaScript</a></li>
                     </ul>                            
-                </div>
-            </div>
-        </div>
+                </div> -->
+            <!-- </div> -->
+        <!-- </div> -->
         <!-- End Section-Block -->    
     </div>    
     <!-- End Top Categories -->

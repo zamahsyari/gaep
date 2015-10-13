@@ -4,6 +4,7 @@ $this->title = 'Gama Animation Portal';
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\LinkPager;
+use yii\helpers\Url;
 Html::csrfMetaTags()
 ?>
     <!--=== Search Block Version 2 ===-->
@@ -11,15 +12,23 @@ Html::csrfMetaTags()
         <div class="container">
             <div class="col-md-6 col-md-offset-3">
                 <h2>Cari lagi</h2>
-                <form action="<?php echo Yii::$app->request->baseUrl?>/index.php?r=tutorial/search" method="post">
+                <?php
+                	$form=ActiveForm::begin([
+                		'method'	=>	'get',
+                		'action'	=>	Url::toRoute('tutorial/search'),
+                	]);
+                ?>
 	            <div class="input-group">
 	                <input type="text" name="search" value="<?= $search ?>" class="form-control" placeholder="Cari Tutorial Animasi ...">
-	                <input type="hidden" name="_csrf" value="ZEZ6Y0xrY3ARGS42fTwhMQgkDgF6BCEGEx4SMXQMBR4CPy0iPCIwNQ==">
+	                <!-- <input type="hidden" name="_csrf" value="ZEZ6Y0xrY3ARGS42fTwhMQgkDgF6BCEGEx4SMXQMBR4CPy0iPCIwNQ=="> -->
 	                <span class="input-group-btn">
 	                    <button class="btn-u" type="submit"><i class="fa fa-search"></i></button>
 	                </span>
 	            </div>
-	  			</form>
+	  			<!-- </form> -->
+	  			<?php
+	  				ActiveForm::end();
+	  			?>
             </div>
         </div>    
     </div><!--/container-->     
@@ -29,7 +38,7 @@ Html::csrfMetaTags()
     <div class="container s-results margin-bottom-50">
         <div class="row">
             <div class="col-md-2 hidden-xs related-search">
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12 col-sm-4">
                         <h3>Pencarian terkait</h3>
                         <ul class="list-unstyled">
@@ -69,7 +78,7 @@ Html::csrfMetaTags()
                         <a class="see-all" href="#">See all</a>
                         <hr>
                     </div>    
-                </div>        
+                </div> -->        
             </div><!--/col-md-2-->
 
             <div class="col-md-10">

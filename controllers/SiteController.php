@@ -10,6 +10,8 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\SignupForm;
 use app\models\ContactForm;
+use app\models\TutorialSearch;
+
 
 class SiteController extends Controller
 {
@@ -52,8 +54,10 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $this->layout = 'front';
+		$searchModel = new TutorialSearch();
+        
         $subkategori = Subkategori::find()->all();
-        return $this->render('index',['subkategori'=>$subkategori]);
+        return $this->render('index',['subkategori'=>$subkategori,'searchModel'=>$searchModel]);
     }
 
     public function actionLogin()
@@ -79,6 +83,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
+                	 \Yii::$app->session->set('user.id',$user->id);
                     return $this->goHome();
                 }
             }

@@ -138,7 +138,7 @@ class TutorialController extends Controller
     }
 	
 	public function actionSearch(){
-		$post=Yii::$app->request->post();
+		$post=Yii::$app->request->get();
 		$query=Tutorial::find()->where('judul LIKE :judul',array(':judul'=>'%'.$post['search'].'%'));
 		$pagination = new Pagination([
             'defaultPageSize' => 5,
