@@ -23,5 +23,5 @@ $this->params['breadcrumbs'][] = $this->title;
             
         ],
     ]) ?>
-
+    <a href="<?=$model->file?>"><button class="btn btn-success"><i class="glyphicon glyphicon-cloud-download"></i> Download</button></a>
 </div>
