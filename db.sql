@@ -12,10 +12,6 @@ MySQL - 5.6.12-log : Database - gaep
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`gaep` /*!40100 DEFAULT CHARACTER SET latin1 */;
-
-USE `gaep`;
-
 /*Table structure for table `kategori` */
 
 DROP TABLE IF EXISTS `kategori`;
@@ -59,7 +55,7 @@ CREATE TABLE `tutorial` (
   `judul` varchar(250) DEFAULT NULL,
   `file` varchar(500) DEFAULT NULL,
   `thumb` varchar(500) DEFAULT NULL,
-  `username` varchar(100) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `tag` varchar(1000) DEFAULT NULL,
   `subkategori_id` int(11) DEFAULT NULL,
   `deskripsi` text,
@@ -68,34 +64,36 @@ CREATE TABLE `tutorial` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `tutorial_user_fk` (`username`),
+  KEY `tutorial_user_fk` (`user_id`),
   KEY `subkategori_fk` (`subkategori_id`),
   CONSTRAINT `subkategori_fk` FOREIGN KEY (`subkategori_id`) REFERENCES `subkategori` (`id`),
-  CONSTRAINT `tutorial_user_fk` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  CONSTRAINT `userid_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tutorial` */
 
-insert  into `tutorial`(`id`,`judul`,`file`,`thumb`,`username`,`tag`,`subkategori_id`,`deskripsi`,`downloads`,`views`,`created`,`modified`) values (4,'Mengisi Record Tabel Base','uploads/tutorial/tutorial_4.zip',NULL,NULL,NULL,1,'Bagian dari Tutorial base tentang Mengisi Record Tabel Base',NULL,NULL,'2015-06-28 08:16:50','0000-00-00 00:00:00');
+insert  into `tutorial`(`id`,`judul`,`file`,`thumb`,`user_id`,`tag`,`subkategori_id`,`deskripsi`,`downloads`,`views`,`created`,`modified`) values (4,'Mengisi Record Tabel Base','uploads/tutorial/tutorial_4.zip',NULL,NULL,NULL,1,'Bagian dari Tutorial base tentang Mengisi Record Tabel Base',NULL,NULL,'2015-06-28 08:16:50','0000-00-00 00:00:00'),(5,'Sesuatu Tutorial','uploads/tutorial/tutorial_5.pdf',NULL,8,NULL,1,'Yay',NULL,NULL,'2015-10-04 06:52:23','0000-00-00 00:00:00');
 
-/*Table structure for table `users` */
+/*Table structure for table `user` */
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `user`;
 
-CREATE TABLE `users` (
-  `username` varchar(100) NOT NULL,
-  `password` varchar(1000) DEFAULT NULL,
-  `email` varchar(1000) DEFAULT NULL,
-  `realname` varchar(1000) DEFAULT NULL,
-  `country` int(11) DEFAULT NULL,
-  `point` float DEFAULT NULL,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `last_access` datetime DEFAULT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `status` smallint(6) NOT NULL DEFAULT '10',
+  `created_at` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-/*Data for the table `users` */
+/*Data for the table `user` */
+
+insert  into `user`(`id`,`username`,`auth_key`,`password_hash`,`password_reset_token`,`email`,`status`,`created_at`,`updated_at`) values (7,'gunturbudi','JsPWVomlEYPlLzmd5ssagOayAh4fJmzZ','$2y$13$oK3hXZLmH2uK26VntpViqejD4cWXXRB66GL/klEsTb8SfTMLwCwJ6',NULL,'gunturbudi@gmail.com',10,0,0),(8,'budi','SvwbJA098bfmi6ubCwDTS2yugDQH9hnX','$2y$13$Xdwnfze29fgnVpkVgOhojuVjBBUQA8CbIz3wZLfVq7M7541kGLYQ.',NULL,'budi@gmail.com',10,0,0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

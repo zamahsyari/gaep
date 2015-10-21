@@ -37,7 +37,7 @@ Html::csrfMetaTags()
 
 <div class="container content">
     <!-- Top Categories -->
-    <div class="headline"><h2>Top Categories</h2></div>  
+    <div class="headline"><h2>Kategori Utama</h2></div>  
     <div class="row category margin-bottom-20">
         <!-- Info Blocks -->
         <div class="col-md-4 col-sm-6">
@@ -109,6 +109,47 @@ Html::csrfMetaTags()
     <!-- End Top Categories -->
 </div><!--/container-->     
 <!--=== End Content ===-->
+
+<!--=== Container Part ===-->
+    <div class="bg-grey">
+
+        <div class="container content-md">
+            <div class="headline"><h2>Tutorial Terakhir</h2></div> 
+            <?php foreach ($tuts as $tut):  ?>
+            <ul class="row list-row margin-bottom-30">
+                <?php foreach($tut['tuts'] as $value): ?>
+                <li class="col-md-4">
+                    <div class="content-boxes-v3 block-grid-v1 rounded">
+                        <i class="icon-custom icon-sm rounded-x icon-bg-green icon-line icon-graduation"></i>                        
+                        <div class="content-boxes-in-v3">
+                            <h3><?= Html::a($value['title'], ['tutorial/view', 'id' =>$value['id']])?></h3>
+                            <ul class="star-vote">
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                            </ul>
+                            <ul class="list-inline margin-bottom-5">
+                                <li>By <a class="color-green" href="#"><?= $value['user'] ?></a></li>
+                                <li><i class="fa fa-clock-o"></i><?= $value['created'] ?></li>
+                            </ul>
+                            <p><?= $value['deskripsi'] ?></p>
+                            <ul class="list-inline block-grid-v1-add-info">
+                                <li><a href="#"><i class="fa fa-eye"></i> <?= $value['views'] ?></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i> <?= $value['downloads'] ?></a></li>
+                                <li><a href="#"><i class="fa fa-download"></i> <?= $value['like'] ?></a></li>
+                                <li><a href="#"><i class="fa fa-heart"></i> <?= $value['share'] ?></a></li>
+                            </ul>    
+                        </div>
+                    </div>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+            <?php endforeach; ?>
+            
+        </div>        
+    </div>
 
 
 

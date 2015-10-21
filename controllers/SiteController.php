@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Subkategori;
+use app\models\Tutorial;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -57,7 +58,36 @@ class SiteController extends Controller
 		$searchModel = new TutorialSearch();
         
         $subkategori = Subkategori::find()->all();
-        return $this->render('index',['subkategori'=>$subkategori,'searchModel'=>$searchModel]);
+        $tutorial = Tutorial::find()->joinWith('user')->orderBy(['id'=>SORT_DESC])->limit(6)->all();
+        
+        $tuts = [];
+        $i = 0;
+        foreach ($tutorial as $key => $value) {
+            //echo '<pre>';print_r($value);exit;
+            if($i<3){
+                $j = 0;
+            } else {
+                $j = 1;
+            }
+            $tuts[$j]['tuts'][$i]['title'] = $value['judul'];
+            $tuts[$j]['tuts'][$i]['id'] = $value['id'];
+            $tuts[$j]['tuts'][$i]['deskripsi'] = $value['deskripsi'];
+            $tuts[$j]['tuts'][$i]['user'] = $value['user']['realname'];
+            $tuts[$j]['tuts'][$i]['created'] = $value['created'];
+            $tuts[$j]['tuts'][$i]['downloads'] = $value['downloads'];
+            $tuts[$j]['tuts'][$i]['views'] = $value['views'];
+            $tuts[$j]['tuts'][$i]['like'] = $value['like'];
+            $tuts[$j]['tuts'][$i]['share'] = $value['share'];
+            $i++;
+        }
+
+        
+
+        return $this->render('index',[
+            'subkategori'=>$subkategori,
+            'searchModel'=>$searchModel,
+            'tuts'=>$tuts,
+        ]);
     }
 
     public function actionLogin()
@@ -74,6 +104,10 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionCounterdownload(){
+        return "Something";
     }
 
 
@@ -121,4 +155,8 @@ class SiteController extends Controller
         return $this->render('about');
     }
 	
+    public function actionDownload()
+    {
+        return $this->render('download');
+    }
 }

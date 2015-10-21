@@ -54,6 +54,7 @@ class TutorialController extends Controller
         
     }
 
+
     /**
      * Displays a single Tutorial model.
      * @param integer $id
@@ -61,11 +62,14 @@ class TutorialController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $model->views = $model->views + 1;
+        $model->save();
     	// $data=Tutorial::find()
 				// ->where(['id'=>$id])
 				// ->one();
         return $this->render('view', [
-            'model' =>	$this->findModel($id),
+            'model' =>	$model,
             // 'data'	=>	$data,
         ]);
     }
@@ -139,6 +143,15 @@ class TutorialController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionCounterdownload(){
+        $post_data=Yii::$app->request->post();
+        $model = Tutorial::findOne($post_data['id']);
+        $model->downloads = $model->downloads+1;
+        $model->save();
+
+        return true;
     }
 	
 	public function actionSearch(){

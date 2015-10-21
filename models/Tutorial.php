@@ -17,19 +17,19 @@ use Yii;
  * @property string $deskripsi
  * @property string $downloads
  * @property string $views
+ * @property string $like
+ * @property string $share
  * @property string $created
  * @property string $modified
  *
- * @property User $user
  * @property Subkategori $subkategori
+ * @property User $user
  */
 class Tutorial extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
-
-    public $file_upload;
     public static function tableName()
     {
         return 'tutorial';
@@ -41,7 +41,7 @@ class Tutorial extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'subkategori_id', 'downloads', 'views'], 'integer'],
+            [['user_id', 'subkategori_id', 'downloads', 'views', 'like', 'share'], 'integer'],
             [['deskripsi'], 'string'],
             [['created', 'modified'], 'safe'],
             [['judul'], 'string', 'max' => 250],
@@ -66,6 +66,8 @@ class Tutorial extends \yii\db\ActiveRecord
             'deskripsi' => 'Deskripsi',
             'downloads' => 'Downloads',
             'views' => 'Views',
+            'like' => 'Like',
+            'share' => 'Share',
             'created' => 'Created',
             'modified' => 'Modified',
         ];
@@ -74,16 +76,16 @@ class Tutorial extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function getSubkategori()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(Subkategori::className(), ['id' => 'subkategori_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSubkategori()
+    public function getUser()
     {
-        return $this->hasOne(Subkategori::className(), ['id' => 'subkategori_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }
