@@ -6,6 +6,7 @@ use Yii;
 use app\models\Tutorial;
 use app\models\TutorialSearch;
 use yii\web\Controller;
+use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\data\Pagination;
 use yii\filters\VerbFilter;
@@ -21,6 +22,17 @@ class TutorialController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index','create','update','delete'],
+                'rules' => [
+                    [
+                        'actions' => ['index','create','update','delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
