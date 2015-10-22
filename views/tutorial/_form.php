@@ -17,7 +17,7 @@ use app\models\Subkategori;
 
         <?= $form->field($model, 'judul')->textInput(['maxlength' => 250]) ?>
 
-        <?= $form->field($model, 'file')->fileInput() ?>
+        <?= $form->field($model, 'file')->fileInput(['accept' => '.zip']) ?>
 
 
 
