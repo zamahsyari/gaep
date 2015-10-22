@@ -8,30 +8,50 @@ use yii\helpers\Url;
 Html::csrfMetaTags()
 ?>
     <!--=== Search Block Version 2 ===-->
-    <div class="search-block-v2">
+    <?php
+        $form=ActiveForm::begin([
+        'method'	=>	'get',
+        'action'	=>	Url::toRoute('tutorial/search'),
+    ]);
+	?>
+
+<div class="row">
+<div class="col-xs-4">
+
+</div>
+<div class="col-xs-8">
+
+</div>
+</div>				
+				
+    <div class="search-block-v2" ng-app="purchaseOrderApp" ng-controller="purchaseOrderDetailControl">
         <div class="container">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-8 col-md-offset-2">
                 <h2>Cari lagi</h2>
-                <?php
-                	$form=ActiveForm::begin([
-                		'method'	=>	'get',
-                		'action'	=>	Url::toRoute('tutorial/search'),
-                	]);
-                ?>
 	            <div class="input-group">
-	                <input type="text" name="search" value="<?= $search ?>" class="form-control" placeholder="Cari Tutorial Animasi ...">
+					<select name="kategori_id" class="form-control" style="width: 30%" ng-model="option.selected"  ng-change="refreshSubkategoris()">
+						<option value="">Kategori</option>
+						<?php foreach($kategoris as $kategori){ ?>
+						<option value="<?php echo $kategori->id; ?>"><?php echo $kategori->name; ?></option>
+						<?php } ?>
+					</select>
+					<select name="subkategori_id" class="form-control" style="width: 30%">
+						<option value="">Sub Kategori</option>
+						<option value="{{ subkategori.id }}" ng-repeat="subkategori in subkategoris">{{ subkategori.nama }}</option>
+					</select>
+	                <input type="text" name="search" value="<?= $search ?>" style="width: 40%" class="form-control" placeholder="Cari Tutorial Animasi ...">
 	                <!-- <input type="hidden" name="_csrf" value="ZEZ6Y0xrY3ARGS42fTwhMQgkDgF6BCEGEx4SMXQMBR4CPy0iPCIwNQ=="> -->
 	                <span class="input-group-btn">
 	                    <button class="btn-u" type="submit"><i class="fa fa-search"></i></button>
 	                </span>
 	            </div>
-	  			<!-- </form> -->
-	  			<?php
-	  				ActiveForm::end();
-	  			?>
             </div>
         </div>    
     </div><!--/container-->     
+	<!-- </form> -->
+	<?php
+	ActiveForm::end();
+	?>
     <!--=== End Search Block Version 2 ===-->
 	<hr />
     <!--=== Search Results ===-->
@@ -115,4 +135,5 @@ $this->registerCssFile('@web/unify/plugins/font-awesome/css/font-awesome.min.css
 $this->registerCssFile('@web/unify/plugins/owl-carousel/owl-carousel/owl.carousel.css',['depends'=>'app\assets\AppAsset']);
 $this->registerCssFile('@web/unify/plugins/sky-forms/version-2.0.1/css/custom-sky-forms.css',['depends'=>'app\assets\AppAsset']);
 $this->registerCssFile('@web/unify/css/pages/page_search.css',['depends'=>'app\assets\AppAsset']);
+?>
 

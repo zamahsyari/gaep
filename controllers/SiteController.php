@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Kategori;
 use app\models\Subkategori;
 use app\models\Tutorial;
 use yii\filters\AccessControl;
@@ -86,6 +87,7 @@ class SiteController extends Controller
         return $this->render('index',[
             'subkategori'=>$subkategori,
             'searchModel'=>$searchModel,
+			'kategoris'		=> Kategori::find()->all(),
             'tuts'=>$tuts,
         ]);
     }

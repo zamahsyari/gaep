@@ -3,8 +3,10 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Kategori;
 use app\models\Tutorial;
 use app\models\TutorialSearch;
+use app\models\Subkategori;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
@@ -60,7 +62,17 @@ class TutorialController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
+	
+    public function actionGetsubkategorijson($id='')
+    {
+		if($id == ''){
+			$subkategori = Subkategori::find()->asArray()->all();		
+		}else{
+			$subkategori = Subkategori::find()->where("kategori_id = $id")->asArray()->all();			
+		}
+		 return (json_encode($subkategori));
+    }
+	
     public function actionIndexkategori($subkategori_id)
     {
         
@@ -168,7 +180,9 @@ class TutorialController extends Controller
 	
 	public function actionSearch(){
 		$post=Yii::$app->request->get();
-		$query=Tutorial::find()->where('judul LIKE :judul',array(':judul'=>'%'.$post['search'].'%'));
+		
+		$query=Tutorial::findBySql("SELECT * FROM tutorial WHERE judul LIKE '%".$post['search']."%'".
+			" AND subkategori_id LIKE '%".$post['subkategori_id']."%'");
 		$pagination = new Pagination([
             'defaultPageSize' => 5,
             'totalCount' => $query->count(),
@@ -183,6 +197,7 @@ class TutorialController extends Controller
 			'count'			=> $count,
 			'pagination'	=> $pagination,
 			'search'		=> $post['search'],
+			'kategoris'		=> Kategori::find()->all(),
 		]);
 	}
 }

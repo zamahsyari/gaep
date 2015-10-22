@@ -10,7 +10,7 @@ Html::csrfMetaTags()
 <!--=== Search Block ===-->
 <div class="search-block parallaxBg">
     <div class="container">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-8 col-md-offset-2">
             <h1>PELAJARI <span class="color-green">HAL</span> BARU</h1>
 			<?php
                 	$form=ActiveForm::begin([
@@ -19,9 +19,10 @@ Html::csrfMetaTags()
                 	]);
                 ?>
 	            
-			<div class="input-group">
-                
+			<div class="input-group">                      
                 <input type="text" name="search" class="form-control" placeholder="Cari Tutorial Animasi ...">
+                <input type="hidden" name="kategori_id">
+                <input type="hidden" name="subkategori_id">
                 <!-- <input type="hidden" name="_csrf" value="ZEZ6Y0xrY3ARGS42fTwhMQgkDgF6BCEGEx4SMXQMBR4CPy0iPCIwNQ=="> -->
                 <span class="input-group-btn">
                     <button class="btn-u btn-u-lg" type="submit"><i class="fa fa-search"></i></button>
@@ -40,8 +41,8 @@ Html::csrfMetaTags()
     <div class="headline"><h2>Kategori Utama</h2></div>  
     <div class="row category margin-bottom-20">
         <!-- Info Blocks -->
+        <?php foreach ($subkategori as $key => $value): ?>
         <div class="col-md-4 col-sm-6">
-            <?php foreach ($subkategori as $key => $value): ?>
                 <div class="content-boxes-v3 margin-bottom-10 md-margin-bottom-20">
                     <i class="<?= $value['icon'] ?>"></i>
                     <div class="content-boxes-in-v3">
@@ -49,14 +50,14 @@ Html::csrfMetaTags()
                         <p><?= $value['deskripsi'] ?></p>
                     </div>
                 </div>
-            <?php endforeach; ?>
         </div>    
+        <?php endforeach; ?>
         <!-- End Info Blocks -->
 
         <!-- Info Blocks -->
-        <div class="col-md-4 col-sm-6 md-margin-bottom-40">
+        <!-- <div class="col-md-4 col-sm-6 md-margin-bottom-40"> -->
             
-        </div>    
+        <!-- </div> -->
         <!-- End Info Blocks -->
         
         <!-- Begin Section-Block -->
