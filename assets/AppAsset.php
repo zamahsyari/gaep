@@ -25,6 +25,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'unify/js/app.js',
+        'js/angular.min.js',
         
     ];
     public $depends = [

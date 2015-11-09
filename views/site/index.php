@@ -46,7 +46,7 @@ Html::csrfMetaTags()
                 <div class="content-boxes-v3 margin-bottom-10 md-margin-bottom-20">
                     <i class="<?= $value['icon'] ?>"></i>
                     <div class="content-boxes-in-v3">
-                        <h3><a href="#"> <?= $value['nama'] ?></a></h3>
+                        <h3><a href="<?php echo Url::toRoute('tutorial/search').'&search=&subkategori_id='.$value['id'] ?>"> <?= $value['nama'] ?></a></h3>
                         <p><?= $value['deskripsi'] ?></p>
                     </div>
                 </div>

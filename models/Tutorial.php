@@ -42,7 +42,6 @@ class Tutorial extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['file','judul','user_id','subkategori_id','deskripsi'],'required'],
             [['user_id', 'subkategori_id', 'downloads', 'views', 'like', 'share'], 'integer'],
             [['deskripsi'], 'string'],
             [['created', 'modified'], 'safe'],

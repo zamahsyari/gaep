@@ -26,10 +26,10 @@ class TutorialController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index','create','update','delete'],
+                'only' => ['index','create','update','delete','getsubkategori'],
                 'rules' => [
                     [
-                        'actions' => ['index','create','update','delete'],
+                        'actions' => ['index','create','update','delete','getsubkategori'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
